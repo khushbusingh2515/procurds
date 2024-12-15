@@ -1,0 +1,69 @@
+{% load static %} <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CRUD Interface</title>
+    <link rel="stylesheet" href="{% static 'myapp/styles.css' %}" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>CRUD Application</h1>
+
+      <!-- Create New Item Section -->
+      <div class="create-item-container">
+        <h2>Create New Item</h2>
+        <div class="form-container">
+          <form action="/create" method="POST">
+            {% csrf_token %}
+            <input
+              type="text"
+              name="item_name"
+              placeholder="Enter Item Name"
+              required
+            />
+            <input
+              type="number"
+              name="item_price"
+              placeholder="Enter Item Price"
+              required
+            />
+            <button type="submit">Create Item</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Item List Section -->
+      <div class="item-list-container">
+        <h2>Item List</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Item Name</th>
+              <th>Price</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in items %}
+            <tr>
+              <td>{{ item.id }}</td>
+              <td>{{ item.name }}</td>
+              <td>{{ item.price }}</td>
+              <td>
+                <a href="{% url 'edit_item' item.id %}" class="btn btn-primary"
+                  >Edit</a
+                >
+                <a href="{% url 'delete_item' item.id %}" class="btn btn-danger"
+                  >Delete</a
+                >
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

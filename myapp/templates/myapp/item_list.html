@@ -1,0 +1,32 @@
+{% load static %} <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CRUD Interface</title>
+    <link rel="stylesheet" href="{% static 'myapp/styles.css' %}" />
+  </head>
+  <body>
+    <h1>Item List</h1>
+    <a href="{% url 'create_item' %}">Create New Item</a>
+    <ul>
+      {% for item in items %}
+      <li>
+        <table>
+          <tr>
+            <td>{{ item.name }} - {{ item.description }} - {{ item.price }}</td>
+          </tr>
+          <tr>
+            <td>
+              <a href="{% url 'update_item' item.id %}">Edit</a> |
+              <a href="{% url 'delete_item' item.id %}">Delete</a>
+            </td>
+          </tr>
+        </table>
+      </li>
+      {% empty %}
+      <li>No items available.</li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>

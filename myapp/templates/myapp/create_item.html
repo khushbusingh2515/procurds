@@ -1,0 +1,17 @@
+<!-- create_item.html -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Create Item</title>
+  </head>
+  <body>
+    <h1>Create Item</h1>
+    <form method="POST">
+      {% csrf_token %} {{ form.as_p }}
+      <button type="submit">Create Item</button>
+    </form>
+    <a href="{% url 'create_item' %}" class="btn btn-primary mb-3"
+      >Create New Item</a
+    >
+  </body>
+</html>
